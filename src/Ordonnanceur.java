@@ -121,7 +121,6 @@ public class Ordonnanceur {
 		}
 	}
 	
-	
 	public void ordoRM() {
 		LinkedList<TachePeriodique> tachesPRM = new LinkedList<>(tachesP);
 		
@@ -199,6 +198,41 @@ public class Ordonnanceur {
 		}
 		
 	}
+
+	public void ordoEDF() {
+		
+		LinkedList<TachePeriodique> tachesPEDF = new LinkedList<>(tachesP);
+		
+		int time = 0;
+		int quantum = 1;
+		while(time < hyperPeriode) {
+			
+			//Si une tâche se réveille on la déplace à la fin de la liste
+			for(int i = 0; i < tachesPEDF.size(); i++) {
+				tachesPEDF.get(i).reveiller(time);
+			}
+			
+			//Trouver la tâche dont la deadline est la plus proche
+			int shortestD = Integer.MAX_VALUE;
+			int indiceTache = 0;
+			
+			for(int i = 0; i < tachesPEDF.size(); i++) {
+				if(tachesPEDF.get(i).getD() < shortestD && tachesPEDF.get(i).getcRestante() != 0 ) {
+					shortestD = tachesPEDF.get(i).getD();
+					indiceTache = i;
+				}
+			}
+			
+			if(tachesPEDF.get(indiceTache).getcRestante() != 0) {
+				tachesPEDF.get(indiceTache).effectuer(quantum);
+			}
+			
+			
+			afficherTaches(tachesPEDF,time,quantum);
+			time += quantum;
+		}
+	}
+	
 
 	
 	

@@ -20,7 +20,8 @@ public class Main {
 		//ordonnanceur.ordoSJF();
 		//ordonnanceur.ordoFIFO();
 		//ordonnanceur.ordoRM();
-		ordonnanceur.ordoDM();
+		//ordonnanceur.ordoDM();
+		ordonnanceur.ordoEDF();
 		
 	}
 
