@@ -8,7 +8,7 @@ public class Ordonnanceur {
 	
 	public Ordonnanceur(LinkedList<TachePeriodique> tachesPeriodiques) {
 		this.tachesP = tachesPeriodiques;
-		//this.hyperPeriode = calculHyperPeriode(tachesPeriodiques);
+		this.hyperPeriode = calculHyperPeriode(tachesPeriodiques);
 	}
 	
 	public void ordoRR(int quantum) {
@@ -277,7 +277,7 @@ public class Ordonnanceur {
 		System.out.println();
 	}
 	
-	/*
+	
 	public int calculHyperPeriode(LinkedList<TachePeriodique> tachesPeriodiques) {
       int min, max, x, ppcm = 0;
       
@@ -301,7 +301,7 @@ public class Ordonnanceur {
       }
       return ppcm;
    }
-   */
+   
 	public void setHyperPeriode(int hp) {
 		this.hyperPeriode = hp;
 	}
