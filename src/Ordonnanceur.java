@@ -25,9 +25,25 @@ public class Ordonnanceur {
 			}
 			
 			TachePeriodique t = tachesPeriodiques.pop();
-			System.out.print("Effectuer " + t.getName());
+			int popCount = 1;
+			
+			while(t.getcRestante() == 0 && popCount < tachesPeriodiques.size() ) {
+				tachesPeriodiques.add(t);
+				t = tachesPeriodiques.pop();
+				popCount++;
+			}
+			
+			if(t.getcRestante() != 0) {
+				System.out.print("Effectuer " + t.getName());
+				t.effectuer(quantum);
+				
+			}
+			else {
+				System.out.println("Aucune tâche prête");
+			}
+			
 			System.out.println();
-			t.effectuer(quantum);
+			
 			tachesPeriodiques.add(t);
 			
 			afficherTaches(time);

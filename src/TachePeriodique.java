@@ -11,7 +11,7 @@ public class TachePeriodique extends Tache {
 	
 	
 	public void actualiser(int time) {
-		System.out.println(name + " " + time + " " + d);
+		//System.out.println(name + " " + time + " " + d);
 		if(time >= d) {
 			System.out.println("Reset " + name);
 			cRestante = c;
