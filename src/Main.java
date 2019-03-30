@@ -13,8 +13,7 @@ public class Main {
 		tachesPeriodiques.add(new TachePeriodique(0, 20, 40, 2, Tache.PRET,"Tache 3",80));
 		
 		Ordonnanceur ordonnanceur = new Ordonnanceur(tachesPeriodiques);
-		
-		System.out.println("Hyperpériode : " + ordonnanceur.calculHyperPeriode(tachesPeriodiques));
+		ordonnanceur.setHyperPeriode(120);
 		
 		//ordonnanceur.ordoRR(10);
 		//ordonnanceur.ordoSJF();
