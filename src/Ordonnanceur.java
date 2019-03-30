@@ -306,5 +306,8 @@ public class Ordonnanceur {
 		this.hyperPeriode = hp;
 	}
 	
+	public int getHyperPeriode() {
+		return hyperPeriode;
+	}
 	
 }

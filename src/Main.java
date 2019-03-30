@@ -14,6 +14,11 @@ public class Main {
 		
 		Ordonnanceur ordonnanceur = new Ordonnanceur(tachesPeriodiques);
 		
+		DisplayWindow displayWindow = new DisplayWindow(ordonnanceur.getHyperPeriode(), tachesPeriodiques.size());
+		displayWindow.ajouterReveil("Tache 1", 10);
+		displayWindow.ajouterReveil("Tache 2", 20);
+		
+		
 		System.out.println("Hyperpériode : " + ordonnanceur.calculHyperPeriode(tachesPeriodiques));
 		
 		//ordonnanceur.ordoRR(10);
