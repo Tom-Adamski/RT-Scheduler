@@ -1,9 +1,9 @@
 
 public abstract class Tache {
 	
-	private int r, priority, state, d, c;
-	private String name;
-	private boolean isActive;
+	protected int r, priority, state, d, c, cRestante;
+	protected String name;
+	protected boolean isActive;
 	
 	public static final int PRET = 0;
 	public static final int ACTIF = 1;
@@ -14,6 +14,7 @@ public abstract class Tache {
 	public Tache() {
 		this.r = 0;
 		this.c = 0;
+		this.cRestante = 0;
 		this.d = 0;
 		this.priority = 0;
 		this.state = 0;
@@ -24,10 +25,17 @@ public abstract class Tache {
 	public Tache(int r, int c, int d, int priority, int state, String name) {
 		this.r = r;
 		this.c = c;
+		this.cRestante = c;
 		this.d = d;
 		this.priority = priority;
 		this.state = state;
 		this.name = name;
+	}
+	
+	public void effectuer(int time) {
+		this.cRestante -= time;
+		if(cRestante < 0)
+			cRestante = 0;
 	}
 
 
@@ -78,6 +86,15 @@ public abstract class Tache {
 
 	public void setC(int c) {
 		this.c = c;
+	}
+	
+	public int getcRestante() {
+		return cRestante;
+	}
+
+
+	public void setcRestante(int cRestante) {
+		this.cRestante = cRestante;
 	}
 
 

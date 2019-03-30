@@ -9,11 +9,16 @@ public class TachePeriodique extends Tache {
 		this.p = p;
 	}
 	
-	public TachePeriodique()
-	{
-		
+	
+	public void actualiser(int time) {
+		System.out.println(name + " " + time + " " + d);
+		if(time >= d) {
+			System.out.println("Reset " + name);
+			cRestante = c;
+			d += d;
+		}
 	}
-
+	
 	public int getP() {
 		return p;
 	}
@@ -22,7 +27,10 @@ public class TachePeriodique extends Tache {
 		this.p = p;
 	}
 	
-		
+	
+	public String toString() {
+		return name+" | C = "+cRestante+" | D = "+d;
+	}
 	
 
 }
