@@ -12,6 +12,8 @@ public class TachePeriodique extends Tache {
 	
 	public boolean reveiller(int time) {
 		//System.out.println(name + " " + time + " " + d);
+		if(time == r)
+			return true;
 		if(time >= d) {
 			System.out.println("Réveil " + name);
 			cRestante = c;

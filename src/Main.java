@@ -12,22 +12,19 @@ public class Main {
 		tachesPeriodiques.add(new TachePeriodique(0, 30, 60, 3, Tache.PRET,"Tache 2",60));
 		tachesPeriodiques.add(new TachePeriodique(0, 20, 40, 2, Tache.PRET,"Tache 3",40));
 		
-		Ordonnanceur ordonnanceur = new Ordonnanceur(tachesPeriodiques);
+		//Ordonnanceur ordonnanceur = new Ordonnanceur(tachesPeriodiques);
+		OrdonnanceurGraphique ordonnanceur = new OrdonnanceurGraphique(tachesPeriodiques);
 		
-		DisplayWindow displayWindow = new DisplayWindow(ordonnanceur.getHyperPeriode(), tachesPeriodiques.size());
-		displayWindow.ajouterReveil("Tache 1", 10);
-		displayWindow.ajouterReveil("Tache 2", 20);
-		
-		
-		System.out.println("Hyperpériode : " + ordonnanceur.calculHyperPeriode(tachesPeriodiques));
-		
-		//ordonnanceur.ordoRR(10);
+		ordonnanceur.ordoRR(10);
 		//ordonnanceur.ordoSJF();
 		//ordonnanceur.ordoFIFO();
 		//ordonnanceur.ordoRM();
 		//ordonnanceur.ordoDM();
 		//ordonnanceur.ordoEDF();
-		ordonnanceur.ordoLLF();
+		//ordonnanceur.ordoLLF();
+				
+		
+		
 		
 	}
 

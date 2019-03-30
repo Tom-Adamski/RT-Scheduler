@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
 
@@ -11,7 +12,8 @@ public class DisplayPanel extends JPanel {
 	private ArrayList<String> nomsTaches;
 	
 	private static int hauteurTache = 100;
-	private static int largeurQuantum = 1;
+	private static int marge = 10;
+	private static int largeurQuantum = 5;
 	
 	
 	public DisplayPanel() {
@@ -33,19 +35,39 @@ public class DisplayPanel extends JPanel {
 	}
 
 	public void paintComponent(Graphics g){
-			
+		
+		System.out.println("Drawing");
+		g.setColor(Color.RED);
 		for(Reveil r : reveils) {
 			int j = chercherIndice(r.name);
-			g.fillRect(r.time * largeurQuantum, j * hauteurTache, (r.time+1) * largeurQuantum, (j+1)*hauteurTache);
+			g.fillRect(r.time*largeurQuantum,
+					j*(hauteurTache+marge), 
+					largeurQuantum,
+					hauteurTache);
 		}
+		
+		g.setColor(Color.BLUE);
+		for(Quantum q : quantums) {
+			int j = chercherIndice(q.name);
+			
+			System.out.println( (j*(hauteurTache+marge) + hauteurTache * (float)q.cRestant/q.cTotal));
+			
+			g.drawLine(q.time*largeurQuantum,
+					j*(hauteurTache+marge),
+					(q.time+q.quantum)*largeurQuantum,
+					(j+1)*(hauteurTache+marge));
+		
+		}
+		
+		
 	} 
   
 	public void ajouterReveil(String name, int time) {
 		reveils.add(new Reveil(name, time));
 	}
 	
-	public void ajouterQuantum() {
-		
+	public void ajouterQuantum(String name, int time, int quantum, int cTotal, int cRestant) {
+		quantums.add(new Quantum(name, time, quantum, cTotal, cRestant));
 	}
 	
 	private int chercherIndice(String s) {
@@ -77,7 +99,18 @@ public class DisplayPanel extends JPanel {
 	class Quantum {
 		String name;
 		int time;
-		int duree;
+		int quantum;
+		int cTotal;
+		int cRestant;
+		
+		public Quantum(String name, int time, int quantum, int cTotal, int cRestant) {
+			this.name = name;
+			this.time = time;
+			this.quantum = quantum;
+			this.cTotal = cTotal;
+			this.cRestant = cRestant;
+		}
+		
 	}
   
 }

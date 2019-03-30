@@ -7,11 +7,12 @@ public class DisplayWindow extends JFrame {
 	private DisplayPanel displayPanel;
 	
 	public static final int hauteurTache = 100;
-	public static final int largeurQuantum= 1;
+	public static final int largeurQuantum= 5;
 	
 	public DisplayWindow(int hyperPeriode, int nbTaches){             
 	    this.setTitle("Ma première fenêtre Java");
-	    this.setSize(hyperPeriode, hauteurTache * nbTaches);
+	    // La fenêtre n'a pas exactement la bonne taille à cause des bords, on l'agrandit artificellement
+	    this.setSize(hyperPeriode*largeurQuantum +50, hauteurTache * nbTaches + 100);
 	    this.setLocationRelativeTo(null);     
 	    this.displayPanel = new DisplayPanel();
 	    
@@ -25,8 +26,8 @@ public class DisplayWindow extends JFrame {
 		displayPanel.repaint();
 	}
 	
-	public void ajouterQuantum() {
-		displayPanel.ajouterQuantum();
+	public void ajouterQuantum(String name, int time, int quantum, int cTotal, int cRestant) {
+		displayPanel.ajouterQuantum(name, time, quantum, cTotal, cRestant);
 		displayPanel.repaint();
 	}
 	
