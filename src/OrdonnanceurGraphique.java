@@ -70,23 +70,26 @@ public class OrdonnanceurGraphique {
 		int time = 0;
 		int quantum = 1;
 		while(time < hyperPeriode) {
-			
+			System.out.println("Time : "+time+" Size is " + tachesPSJF.size());
+
 			for(TachePeriodique t : tachesPSJF) {
-				t.reveiller(time);
+				if(t.reveiller(time))
+					displayWindow.ajouterReveil(t.getName(), time);
 			}
 			
 			// Effectuer la première tâche possible dans la liste
 			for(Tache t : tachesPSJF) {
 				if(t.getcRestante() > 0) {
 					t.effectuer(quantum);
+					displayWindow.ajouterQuantum(t.getName(), time, quantum, t.getC(), t.getcRestante());
 					break;
 				}
 			}
 			
-			afficherTaches(tachesPSJF,time,quantum);
 			time += quantum;
 		}
 		
+		displayWindow.revalidate();
 	}
 	
 	public void ordoFIFO() {
@@ -102,19 +105,21 @@ public class OrdonnanceurGraphique {
 				if(tachesPFIFO.get(i).reveiller(time)) {
 					TachePeriodique t = tachesPFIFO.remove(i);
 					tachesPFIFO.add(t);
+					displayWindow.ajouterReveil(t.getName(), time);
 				}
 			}
 			
 			for(Tache t : tachesPFIFO) {
 				if(t.getcRestante() > 0) {
 					t.effectuer(quantum);
+					displayWindow.ajouterQuantum(t.getName(), time, quantum, t.getC(), t.getcRestante());
 					break;
 				}
 			}
 			
-			afficherTaches(tachesPFIFO,time,quantum);
 			time += quantum;
 		}
+		displayWindow.revalidate();
 	}
 	
 	public void ordoRM() {
@@ -139,21 +144,21 @@ public class OrdonnanceurGraphique {
 		while(time < hyperPeriode) {
 			
 			for(TachePeriodique t : tachesPRM) {
-				t.reveiller(time);
+				if(t.reveiller(time))
+					displayWindow.ajouterReveil(t.getName(), time);
 			}
 			
 			// Effectuer la première tâche possible dans la liste
 			for(Tache t : tachesPRM) {
 				if(t.getcRestante() > 0) {
 					t.effectuer(quantum);
+					displayWindow.ajouterQuantum(t.getName(), time, quantum, t.getC(), t.getcRestante());
 					break;
 				}
 			}
-			
-			afficherTaches(tachesPRM,time,quantum);
 			time += quantum;
 		}
-		
+		displayWindow.revalidate();
 	}
 
 	public void ordoDM() {
@@ -178,21 +183,21 @@ public class OrdonnanceurGraphique {
 		while(time < hyperPeriode) {
 			
 			for(TachePeriodique t : tachesPDM) {
-				t.reveiller(time);
+				if(t.reveiller(time))
+					displayWindow.ajouterReveil(t.getName(), time);
 			}
 			
 			// Effectuer la première tâche possible dans la liste
 			for(Tache t : tachesPDM) {
 				if(t.getcRestante() > 0) {
 					t.effectuer(quantum);
+					displayWindow.ajouterQuantum(t.getName(), time, quantum, t.getC(), t.getcRestante());
 					break;
 				}
 			}
-			
-			afficherTaches(tachesPDM,time,quantum);
 			time += quantum;
 		}
-		
+		displayWindow.revalidate();
 	}
 
 	public void ordoEDF() {
@@ -205,7 +210,8 @@ public class OrdonnanceurGraphique {
 
 			// Réveil tâches
 			for(int i = 0; i < tachesPEDF.size(); i++) {
-				tachesPEDF.get(i).reveiller(time);
+				if(tachesPEDF.get(i).reveiller(time))
+					displayWindow.ajouterReveil(tachesPEDF.get(i).getName(), time);
 			}
 			
 			//Trouver la tâche dont la deadline est la plus proche
@@ -221,12 +227,13 @@ public class OrdonnanceurGraphique {
 			
 			if(tachesPEDF.get(indiceTache).getcRestante() != 0) {
 				tachesPEDF.get(indiceTache).effectuer(quantum);
+				displayWindow.ajouterQuantum(tachesPEDF.get(indiceTache).getName(), time, quantum, 
+						tachesPEDF.get(indiceTache).getC(), tachesPEDF.get(indiceTache).getcRestante());
 			}
 			
-			
-			afficherTaches(tachesPEDF,time,quantum);
 			time += quantum;
 		}
+		displayWindow.revalidate();
 	}
 	
 	public void ordoLLF() {
@@ -239,7 +246,8 @@ public class OrdonnanceurGraphique {
 			
 			// Réveil tâches
 			for(int i = 0; i < tachesPLLF.size(); i++) {
-				tachesPLLF.get(i).reveiller(time);
+				if(tachesPLLF.get(i).reveiller(time))
+					displayWindow.ajouterReveil(tachesPLLF.get(i).getName(), time);
 			}
 			
 			//Trouver la tâche dont la marge est la plus petite
@@ -255,12 +263,13 @@ public class OrdonnanceurGraphique {
 			
 			if(tachesPLLF.get(indiceTache).getcRestante() != 0) {
 				tachesPLLF.get(indiceTache).effectuer(quantum);
+				displayWindow.ajouterQuantum(tachesPLLF.get(indiceTache).getName(), time, quantum,
+						tachesPLLF.get(indiceTache).getC(), tachesPLLF.get(indiceTache).getcRestante());
 			}
 			
-			
-			afficherTaches(tachesPLLF,time,quantum);
 			time += quantum;
 		}
+		displayWindow.revalidate();
 	}
 	
 

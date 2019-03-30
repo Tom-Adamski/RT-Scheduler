@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.util.ArrayList;
 
@@ -38,8 +39,10 @@ public class DisplayPanel extends JPanel {
 		
 		System.out.println("Drawing");
 		g.setColor(Color.RED);
+		
 		for(Reveil r : reveils) {
 			int j = chercherIndice(r.name);
+			
 			g.fillRect(r.time*largeurQuantum,
 					j*(hauteurTache+marge), 
 					largeurQuantum,
@@ -50,12 +53,11 @@ public class DisplayPanel extends JPanel {
 		for(Quantum q : quantums) {
 			int j = chercherIndice(q.name);
 			
-			System.out.println( (j*(hauteurTache+marge) + hauteurTache * (float)q.cRestant/q.cTotal));
-			
 			g.drawLine(q.time*largeurQuantum,
-					j*(hauteurTache+marge),
+					(int)(j*(hauteurTache+marge) + hauteurTache*((float)(q.cTotal - q.cRestant)/q.cTotal)),
 					(q.time+q.quantum)*largeurQuantum,
-					(j+1)*(hauteurTache+marge));
+					(int)(j*(hauteurTache+marge) + hauteurTache*((float)(q.cTotal - q.cRestant+q.quantum)/q.cTotal))
+					);
 		
 		}
 		

@@ -15,12 +15,12 @@ public class Main {
 		//Ordonnanceur ordonnanceur = new Ordonnanceur(tachesPeriodiques);
 		OrdonnanceurGraphique ordonnanceur = new OrdonnanceurGraphique(tachesPeriodiques);
 		
-		ordonnanceur.ordoRR(10);
+		//ordonnanceur.ordoRR(5);
 		//ordonnanceur.ordoSJF();
 		//ordonnanceur.ordoFIFO();
 		//ordonnanceur.ordoRM();
 		//ordonnanceur.ordoDM();
-		//ordonnanceur.ordoEDF();
+		ordonnanceur.ordoEDF();
 		//ordonnanceur.ordoLLF();
 				
 		

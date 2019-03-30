@@ -10,7 +10,7 @@ public class DisplayWindow extends JFrame {
 	public static final int largeurQuantum= 5;
 	
 	public DisplayWindow(int hyperPeriode, int nbTaches){             
-	    this.setTitle("Ma première fenêtre Java");
+	    this.setTitle("Ordonnanceur");
 	    // La fenêtre n'a pas exactement la bonne taille à cause des bords, on l'agrandit artificellement
 	    this.setSize(hyperPeriode*largeurQuantum +50, hauteurTache * nbTaches + 100);
 	    this.setLocationRelativeTo(null);     
