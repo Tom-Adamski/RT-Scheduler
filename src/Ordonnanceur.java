@@ -2,12 +2,12 @@ import java.util.LinkedList;
 
 public class Ordonnanceur {
 
-	private LinkedList<TachePeriodique> tachesPeriodiques;
+	private LinkedList<TachePeriodique> tachesP;
 	
 	private int hyperPeriode = 0;
 	
 	public Ordonnanceur(LinkedList<TachePeriodique> tachesPeriodiques) {
-		this.tachesPeriodiques = tachesPeriodiques;
+		this.tachesP = tachesPeriodiques;
 		
 		this.hyperPeriode = calculHyperPeriode(tachesPeriodiques);
 	}
@@ -16,20 +16,20 @@ public class Ordonnanceur {
 		int i = 0;
 		int time = 0;
 		
-		afficherTaches(time);
+		afficherTaches(tachesP,time);
 		
 		while(time < hyperPeriode) {
 	
-			for(TachePeriodique t : tachesPeriodiques) {
+			for(TachePeriodique t : tachesP) {
 				t.actualiser(time);
 			}
 			
-			TachePeriodique t = tachesPeriodiques.pop();
+			TachePeriodique t = tachesP.pop();
 			int popCount = 1;
 			
-			while(t.getcRestante() == 0 && popCount < tachesPeriodiques.size() ) {
-				tachesPeriodiques.add(t);
-				t = tachesPeriodiques.pop();
+			while(t.getcRestante() == 0 && popCount < tachesP.size() ) {
+				tachesP.add(t);
+				t = tachesP.pop();
 				popCount++;
 			}
 			
@@ -39,25 +39,64 @@ public class Ordonnanceur {
 				
 			}
 			else {
-				System.out.println("Aucune tâche prête");
+				System.out.print("Aucune tâche prête");
 			}
 			
 			System.out.println();
 			
-			tachesPeriodiques.add(t);
+			tachesP.add(t);
 			
-			afficherTaches(time);
+			afficherTaches(tachesP, time);
 			time += quantum;
 		}
 		
 		
 	}
+
+	public void ordoSJF() {
+		LinkedList<TachePeriodique> tachesPTriées = new LinkedList<>(tachesP);
+		
+		boolean sorted = false;
+		while(sorted == false) {
+			sorted = true;
+			for(int i = 0; i < tachesPTriées.size() - 1; i++) {
+				if(tachesPTriées.get(i).getC() > tachesPTriées.get(i+1).getC()) {
+					sorted = false;
+					TachePeriodique t = tachesPTriées.get(i);
+					tachesPTriées.set(i, tachesPTriées.get(i+1));
+					tachesPTriées.set(i+1, t);
+				}
+			}
+		}
+		
+		int time = 0;
+		int quantum = 1;
+		while(time <= hyperPeriode) {
+			
+			for(TachePeriodique t : tachesPTriées) {
+				t.actualiser(time);
+			}
+			
+			for(Tache t : tachesPTriées) {
+				if(t.getcRestante() > 0) {
+					t.effectuer(quantum);
+					break;
+				}
+			}
+			
+			afficherTaches(tachesPTriées,time);
+			time += quantum;
+		}
+		
+		
+		
+		
+	}
 	
 	
-	
-	public void afficherTaches(int time) {
-		for(TachePeriodique tache : tachesPeriodiques) {
-			System.out.println("T = "+time+"| "+tache);
+	public void afficherTaches(LinkedList<TachePeriodique> taches, int time) {
+		for(TachePeriodique tache : taches) {
+			System.out.println("T = "+time+" -> "+(time+1)+" | "+tache);
 		}
 		System.out.println();
 	}

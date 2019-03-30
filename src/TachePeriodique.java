@@ -13,7 +13,7 @@ public class TachePeriodique extends Tache {
 	public void actualiser(int time) {
 		//System.out.println(name + " " + time + " " + d);
 		if(time >= d) {
-			System.out.println("Reset " + name);
+			System.out.println("Réveil " + name);
 			cRestante = c;
 			d += d;
 		}

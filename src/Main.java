@@ -9,14 +9,15 @@ public class Main {
 		
 		// Réveil, charge, deadline, priorité, état, nom, période
 		tachesPeriodiques.add(new TachePeriodique(0, 10, 40, 1, Tache.PRET,"Tache 1",40));
-		tachesPeriodiques.add(new TachePeriodique(0, 20, 80, 2, Tache.PRET,"Tache 2",80));
 		tachesPeriodiques.add(new TachePeriodique(0, 30, 120, 3, Tache.PRET,"Tache 3",120));
+		tachesPeriodiques.add(new TachePeriodique(0, 20, 80, 2, Tache.PRET,"Tache 2",80));
 		
 		Ordonnanceur ordonnanceur = new Ordonnanceur(tachesPeriodiques);
 		
 		System.out.println("Hyperpériode : " + ordonnanceur.calculHyperPeriode(tachesPeriodiques));
 		
-		ordonnanceur.ordoRR(10);
+		//ordonnanceur.ordoRR(10);
+		//ordonnanceur.ordoSJF();
 
 	}
 
