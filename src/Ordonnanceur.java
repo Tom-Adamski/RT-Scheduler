@@ -27,6 +27,7 @@ public class Ordonnanceur {
 			TachePeriodique t = tachesP.pop();
 			int popCount = 1;
 			
+			// Trouver une tâche à effectuer pendant un quantum
 			while(t.getcRestante() == 0 && popCount < tachesP.size() ) {
 				tachesP.add(t);
 				t = tachesP.pop();
@@ -56,6 +57,7 @@ public class Ordonnanceur {
 	public void ordoSJF() {
 		LinkedList<TachePeriodique> tachesPTriées = new LinkedList<>(tachesP);
 		
+		// Tri par charge croissante
 		boolean sorted = false;
 		while(sorted == false) {
 			sorted = true;
@@ -77,6 +79,7 @@ public class Ordonnanceur {
 				t.reveiller(time);
 			}
 			
+			// Effectuer la première tâche possible dans la liste
 			for(Tache t : tachesPTriées) {
 				if(t.getcRestante() > 0) {
 					t.effectuer(quantum);
@@ -90,7 +93,33 @@ public class Ordonnanceur {
 		
 	}
 	
-	
+	public void ordoFIFO() {
+		
+		LinkedList<TachePeriodique> tachesPFIFO = new LinkedList<>(tachesP);
+		
+		int time = 0;
+		int quantum = 1;
+		while(time <= hyperPeriode) {
+			
+			//Si une tâche se réveille on la déplace à la fin de la liste
+			for(int i = 0; i < tachesPFIFO.size(); i++) {
+				if(tachesPFIFO.get(i).reveiller(time)) {
+					TachePeriodique t = tachesPFIFO.remove(i);
+					tachesPFIFO.add(t);
+				}
+			}
+			
+			for(Tache t : tachesPFIFO) {
+				if(t.getcRestante() > 0) {
+					t.effectuer(quantum);
+					break;
+				}
+			}
+			
+			afficherTaches(tachesPFIFO,time);
+			time += quantum;
+		}
+	}
 	
 	public void afficherTaches(LinkedList<TachePeriodique> taches, int time) {
 		for(TachePeriodique tache : taches) {
