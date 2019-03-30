@@ -161,6 +161,45 @@ public class Ordonnanceur {
 		
 	}
 
+	public void ordoDM() {
+		LinkedList<TachePeriodique> tachesPDM = new LinkedList<>(tachesP);
+		
+		// Tri par deadline croissante
+		boolean sorted = false;
+		while(sorted == false) {
+			sorted = true;
+			for(int i = 0; i < tachesPDM.size() - 1; i++) {
+				if(tachesPDM.get(i).getD() > tachesPDM.get(i+1).getD()) {
+					sorted = false;
+					TachePeriodique t = tachesPDM.get(i);
+					tachesPDM.set(i, tachesPDM.get(i+1));
+					tachesPDM.set(i+1, t);
+				}
+			}
+		}
+		
+		int time = 0;
+		int quantum = 1;
+		while(time < hyperPeriode) {
+			
+			for(TachePeriodique t : tachesPDM) {
+				t.reveiller(time);
+			}
+			
+			// Effectuer la première tâche possible dans la liste
+			for(Tache t : tachesPDM) {
+				if(t.getcRestante() > 0) {
+					t.effectuer(quantum);
+					break;
+				}
+			}
+			
+			afficherTaches(tachesPDM,time,quantum);
+			time += quantum;
+		}
+		
+	}
+
 	
 	
 	
