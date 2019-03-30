@@ -9,8 +9,8 @@ public class Main {
 		
 		// Réveil, charge, deadline, priorité, état, nom, période
 		tachesPeriodiques.add(new TachePeriodique(0, 10, 40, 1, Tache.PRET,"Tache 1",40));
-		tachesPeriodiques.add(new TachePeriodique(0, 30, 120, 3, Tache.PRET,"Tache 2",120));
-		tachesPeriodiques.add(new TachePeriodique(0, 20, 80, 2, Tache.PRET,"Tache 3",80));
+		tachesPeriodiques.add(new TachePeriodique(0, 30, 60, 3, Tache.PRET,"Tache 2",120));
+		tachesPeriodiques.add(new TachePeriodique(0, 20, 40, 2, Tache.PRET,"Tache 3",80));
 		
 		Ordonnanceur ordonnanceur = new Ordonnanceur(tachesPeriodiques);
 		
@@ -21,7 +21,8 @@ public class Main {
 		//ordonnanceur.ordoFIFO();
 		//ordonnanceur.ordoRM();
 		//ordonnanceur.ordoDM();
-		ordonnanceur.ordoEDF();
+		//ordonnanceur.ordoEDF();
+		ordonnanceur.ordoLLF();
 		
 	}
 

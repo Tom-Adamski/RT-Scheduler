@@ -206,8 +206,8 @@ public class Ordonnanceur {
 		int time = 0;
 		int quantum = 1;
 		while(time < hyperPeriode) {
-			
-			//Si une tâche se réveille on la déplace à la fin de la liste
+
+			// Réveil tâches
 			for(int i = 0; i < tachesPEDF.size(); i++) {
 				tachesPEDF.get(i).reveiller(time);
 			}
@@ -233,6 +233,40 @@ public class Ordonnanceur {
 		}
 	}
 	
+	public void ordoLLF() {
+		
+		LinkedList<TachePeriodique> tachesPLLF = new LinkedList<>(tachesP);
+		
+		int time = 0;
+		int quantum = 1;
+		while(time < hyperPeriode) {
+			
+			// Réveil tâches
+			for(int i = 0; i < tachesPLLF.size(); i++) {
+				tachesPLLF.get(i).reveiller(time);
+			}
+			
+			//Trouver la tâche dont la marge est la plus petite
+			int shortestL = Integer.MAX_VALUE;
+			int indiceTache = 0;
+			
+			for(int i = 0; i < tachesPLLF.size(); i++) {
+				if((tachesPLLF.get(i).getD() -  tachesPLLF.get(i).getcRestante())< shortestL && tachesPLLF.get(i).getcRestante() != 0 ) {
+					shortestL = tachesPLLF.get(i).getD() -  tachesPLLF.get(i).getcRestante();
+					indiceTache = i;
+				}
+			}
+			
+			if(tachesPLLF.get(indiceTache).getcRestante() != 0) {
+				tachesPLLF.get(indiceTache).effectuer(quantum);
+			}
+			
+			
+			afficherTaches(tachesPLLF,time,quantum);
+			time += quantum;
+		}
+	}
+	
 
 	
 	
@@ -248,7 +282,7 @@ public class Ordonnanceur {
       int min, max, x, ppcm = 0;
       
       for(int i = 0; i<tachesPeriodiques.size(); i++) {
-         for(int j = i+1; j<tachesPeriodiques.size(); j++) {
+         for(int j = i+1; j<tachesPeriodiques.size()-1; j++) {
             if(tachesPeriodiques.get(i).getP() > tachesPeriodiques.get(j).getP()) {
                min = tachesPeriodiques.get(j).getP();
                max = tachesPeriodiques.get(i).getP();
