@@ -31,7 +31,7 @@ public class TachePeriodique extends Tache {
 	
 	
 	public String toString() {
-		return name+" | C = "+cRestante+" | D = "+d;
+		return name+" | C = "+cRestante+" | D = "+d+ " | P = "+p;
 	}
 	
 

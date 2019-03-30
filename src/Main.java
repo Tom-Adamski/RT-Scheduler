@@ -18,7 +18,8 @@ public class Main {
 		
 		//ordonnanceur.ordoRR(10);
 		//ordonnanceur.ordoSJF();
-		ordonnanceur.ordoFIFO();
+		//ordonnanceur.ordoFIFO();
+		ordonnanceur.ordoRM();
 
 	}
 
