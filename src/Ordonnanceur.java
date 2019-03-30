@@ -21,7 +21,7 @@ public class Ordonnanceur {
 		while(time < hyperPeriode) {
 	
 			for(TachePeriodique t : tachesP) {
-				t.actualiser(time);
+				t.reveiller(time);
 			}
 			
 			TachePeriodique t = tachesP.pop();
@@ -74,7 +74,7 @@ public class Ordonnanceur {
 		while(time <= hyperPeriode) {
 			
 			for(TachePeriodique t : tachesPTriées) {
-				t.actualiser(time);
+				t.reveiller(time);
 			}
 			
 			for(Tache t : tachesPTriées) {
@@ -88,10 +88,8 @@ public class Ordonnanceur {
 			time += quantum;
 		}
 		
-		
-		
-		
 	}
+	
 	
 	
 	public void afficherTaches(LinkedList<TachePeriodique> taches, int time) {

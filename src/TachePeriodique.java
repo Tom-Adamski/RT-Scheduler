@@ -10,13 +10,15 @@ public class TachePeriodique extends Tache {
 	}
 	
 	
-	public void actualiser(int time) {
+	public boolean reveiller(int time) {
 		//System.out.println(name + " " + time + " " + d);
 		if(time >= d) {
 			System.out.println("Réveil " + name);
 			cRestante = c;
 			d += d;
+			return true;
 		}
+		return false;
 	}
 	
 	public int getP() {
