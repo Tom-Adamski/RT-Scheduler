@@ -32,8 +32,8 @@ public abstract class Tache {
 		this.name = name;
 	}
 	
-	public void effectuer(int time) {
-		this.cRestante -= time;
+	public void effectuer(int quantum) {
+		this.cRestante -= quantum;
 		if(cRestante < 0)
 			cRestante = 0;
 	}
