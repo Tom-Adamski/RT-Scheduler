@@ -18,7 +18,6 @@ public class OrdonnanceurGraphique {
 		int i = 0;
 		int time = 0;
 		
-		afficherTaches(tachesP,time,0);
 		
 		while(time <= hyperPeriode) {
 	
@@ -31,7 +30,7 @@ public class OrdonnanceurGraphique {
 			int popCount = 1;
 			
 			// Trouver une tâche à effectuer pendant un quantum
-			while(t.getcRestante() == 0 && popCount < tachesP.size() ) {
+			while(t.getcRestante() == 0 && time < t.getR() && popCount < tachesP.size() ) {
 				tachesP.add(t);
 				t = tachesP.pop();
 				popCount++;
@@ -70,7 +69,6 @@ public class OrdonnanceurGraphique {
 		int time = 0;
 		int quantum = 1;
 		while(time < hyperPeriode) {
-			System.out.println("Time : "+time+" Size is " + tachesPSJF.size());
 
 			for(TachePeriodique t : tachesPSJF) {
 				if(t.reveiller(time))
@@ -79,7 +77,7 @@ public class OrdonnanceurGraphique {
 			
 			// Effectuer la première tâche possible dans la liste
 			for(Tache t : tachesPSJF) {
-				if(t.getcRestante() > 0) {
+				if(t.getcRestante() > 0 && time > t.getR()) {
 					t.effectuer(quantum);
 					displayWindow.ajouterQuantum(t.getName(), time, quantum, t.getC(), t.getcRestante());
 					break;
@@ -110,7 +108,7 @@ public class OrdonnanceurGraphique {
 			}
 			
 			for(Tache t : tachesPFIFO) {
-				if(t.getcRestante() > 0) {
+				if(t.getcRestante() > 0 && time > t.getR()) {
 					t.effectuer(quantum);
 					displayWindow.ajouterQuantum(t.getName(), time, quantum, t.getC(), t.getcRestante());
 					break;
@@ -150,7 +148,7 @@ public class OrdonnanceurGraphique {
 			
 			// Effectuer la première tâche possible dans la liste
 			for(Tache t : tachesPRM) {
-				if(t.getcRestante() > 0) {
+				if(t.getcRestante() > 0 && time > t.getR()) {
 					t.effectuer(quantum);
 					displayWindow.ajouterQuantum(t.getName(), time, quantum, t.getC(), t.getcRestante());
 					break;
@@ -189,7 +187,7 @@ public class OrdonnanceurGraphique {
 			
 			// Effectuer la première tâche possible dans la liste
 			for(Tache t : tachesPDM) {
-				if(t.getcRestante() > 0) {
+				if(t.getcRestante() > 0 && time > t.getR()) {
 					t.effectuer(quantum);
 					displayWindow.ajouterQuantum(t.getName(), time, quantum, t.getC(), t.getcRestante());
 					break;
@@ -219,7 +217,7 @@ public class OrdonnanceurGraphique {
 			int indiceTache = 0;
 			
 			for(int i = 0; i < tachesPEDF.size(); i++) {
-				if(tachesPEDF.get(i).getD() < shortestD && tachesPEDF.get(i).getcRestante() != 0 ) {
+				if(tachesPEDF.get(i).getD() < shortestD && tachesPEDF.get(i).getcRestante() >= 0 && time > tachesPEDF.get(i).getR() ) {
 					shortestD = tachesPEDF.get(i).getD();
 					indiceTache = i;
 				}
@@ -255,7 +253,7 @@ public class OrdonnanceurGraphique {
 			int indiceTache = 0;
 			
 			for(int i = 0; i < tachesPLLF.size(); i++) {
-				if((tachesPLLF.get(i).getD() -  tachesPLLF.get(i).getcRestante())< shortestL && tachesPLLF.get(i).getcRestante() != 0 ) {
+				if((tachesPLLF.get(i).getD() -  tachesPLLF.get(i).getcRestante())< shortestL && tachesPLLF.get(i).getcRestante() != 0 && time > tachesPLLF.get(i).getcRestante()) {
 					shortestL = tachesPLLF.get(i).getD() -  tachesPLLF.get(i).getcRestante();
 					indiceTache = i;
 				}
@@ -270,17 +268,6 @@ public class OrdonnanceurGraphique {
 			time += quantum;
 		}
 		displayWindow.revalidate();
-	}
-	
-
-	
-	
-	
-	public void afficherTaches(LinkedList<TachePeriodique> taches, int time, int quantum) {
-		for(TachePeriodique tache : taches) {
-			System.out.println("T = "+time+" -> "+(time+quantum)+" | "+tache);
-		}
-		System.out.println();
 	}
 	
 	

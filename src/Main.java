@@ -18,11 +18,15 @@ public class Main {
 		//ordonnanceur.ordoRR(5);
 		//ordonnanceur.ordoSJF();
 		//ordonnanceur.ordoFIFO();
-		//ordonnanceur.ordoRM();
+		ordonnanceur.ordoRM();
 		//ordonnanceur.ordoDM();
-		ordonnanceur.ordoEDF();
+		//ordonnanceur.ordoEDF();
 		//ordonnanceur.ordoLLF();
 				
+		/*
+		 * Redimensionner la fenêtre permet de la réactualiser et de
+		 * faire apparaître certaines barres de réveil
+		 */
 		
 		
 		

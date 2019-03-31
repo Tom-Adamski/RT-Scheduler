@@ -27,7 +27,7 @@ public class Ordonnanceur {
 			int popCount = 1;
 			
 			// Trouver une tâche à effectuer pendant un quantum
-			while(t.getcRestante() == 0 && popCount < tachesP.size() ) {
+			while(t.getcRestante() == 0 && time < t.getR() && popCount < tachesP.size() ) {
 				tachesP.add(t);
 				t = tachesP.pop();
 				popCount++;
@@ -80,7 +80,7 @@ public class Ordonnanceur {
 			
 			// Effectuer la première tâche possible dans la liste
 			for(Tache t : tachesPSJF) {
-				if(t.getcRestante() > 0) {
+				if(t.getcRestante() > 0 && time > t.getR()) {
 					t.effectuer(quantum);
 					break;
 				}
@@ -109,7 +109,7 @@ public class Ordonnanceur {
 			}
 			
 			for(Tache t : tachesPFIFO) {
-				if(t.getcRestante() > 0) {
+				if(t.getcRestante() > 0 && time > t.getR()) {
 					t.effectuer(quantum);
 					break;
 				}
@@ -147,7 +147,7 @@ public class Ordonnanceur {
 			
 			// Effectuer la première tâche possible dans la liste
 			for(Tache t : tachesPRM) {
-				if(t.getcRestante() > 0) {
+				if(t.getcRestante() > 0 && time > t.getR()) {
 					t.effectuer(quantum);
 					break;
 				}
@@ -186,7 +186,7 @@ public class Ordonnanceur {
 			
 			// Effectuer la première tâche possible dans la liste
 			for(Tache t : tachesPDM) {
-				if(t.getcRestante() > 0) {
+				if(t.getcRestante() > 0 && time > t.getR()) {
 					t.effectuer(quantum);
 					break;
 				}
@@ -216,7 +216,7 @@ public class Ordonnanceur {
 			int indiceTache = 0;
 			
 			for(int i = 0; i < tachesPEDF.size(); i++) {
-				if(tachesPEDF.get(i).getD() < shortestD && tachesPEDF.get(i).getcRestante() != 0 ) {
+				if(tachesPEDF.get(i).getD() < shortestD && tachesPEDF.get(i).getcRestante() != 0 && time > tachesPEDF.get(i).getR()) {
 					shortestD = tachesPEDF.get(i).getD();
 					indiceTache = i;
 				}
@@ -250,7 +250,7 @@ public class Ordonnanceur {
 			int indiceTache = 0;
 			
 			for(int i = 0; i < tachesPLLF.size(); i++) {
-				if((tachesPLLF.get(i).getD() -  tachesPLLF.get(i).getcRestante())< shortestL && tachesPLLF.get(i).getcRestante() != 0 ) {
+				if((tachesPLLF.get(i).getD() -  tachesPLLF.get(i).getcRestante())< shortestL && tachesPLLF.get(i).getcRestante() != 0 && time > tachesPLLF.get(i).getR() ) {
 					shortestL = tachesPLLF.get(i).getD() -  tachesPLLF.get(i).getcRestante();
 					indiceTache = i;
 				}

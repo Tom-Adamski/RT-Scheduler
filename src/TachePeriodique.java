@@ -11,12 +11,13 @@ public class TachePeriodique extends Tache {
 	
 	
 	public boolean reveiller(int time) {
-		if(time == r) {
-			return true;
-		}
-		if(time >= d) {
+		if(time == d) {
 			cRestante = c;
 			d += p;
+			r += p;
+		}
+		
+		if(time == r) {
 			return true;
 		}
 		return false;
